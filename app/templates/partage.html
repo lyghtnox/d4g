@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Partage de fichier</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>Partage de fichier</h1>
+<h2>Mettre un document en ligne</h2>
+  <form method="post" action="/" enctype="multipart/form-data">
+      <dl>
+  		<p>
+  			<input type="file" name="file" value="Choisir un fichier" autocomplete="off" required>
+  		</p>
+      </dl>
+      <p>
+  		<input type="submit" value="Publier">
+  	</p>
+  </form>
+<h2>Télécharger un document</h2>
+<form method="get" action="/" enctype="multipart/form-data">
+    <dl>
+    <p>
+      <input type="file" name="file" value="Télécharger un fichier" autocomplete="off" required>
+    </p>
+    </dl>
+    <p>
+    <input type="submit" value="Télécharger">
+  </p>
+</form>
+</body>
+</html>

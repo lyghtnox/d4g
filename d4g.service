@@ -1,0 +1,14 @@
+[Unit]
+Description=Python server for d4g
+After=network-online.target
+
+[Service]
+Type=simple
+User=www-data
+WorkingDirectory=/srv/d4g
+ExecStart=/srv/d4g/venv/bin/python /srv/d4g/d4g.py
+Restart=always
+RestartSec=0
+
+[Install]
+WantedBy=multi-user.target

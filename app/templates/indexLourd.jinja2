@@ -1,0 +1,241 @@
+<html>
+<head>
+<style>html, body{height:100%;transition-duration:0s;}
+form a:link{color:#80D0D0;}
+form a:visited{color:#80D0D0;}
+text_footer{padding-right:20px;}
+body{margin:0;font-family:Arial, Helvetica, sans-serif;background-color:#F0FFFF;font-size:14px;display:flex;flex-direction:column;}
+body.dark-mode{background:#333333;}
+h1{color:#00315E;}
+.dark-mode h1{color:white;}
+div.dark-mode{color:white;}
+footer{width:98%;padding-bottom:5px;padding-top:1px;padding-left:2%;background:#80D0D0;}
+footer a:link{color:#00315E;}
+footer a:visited{color:#00315E;}
+footer.dark-mode a:link{color:#80D0D0;}
+footer.dark-mode a:visited{color:#80D0D0;}
+.dark-mode footer{background:#111111;}
+ul{list-style-type:none;margin:0;overflow:hidden;}
+li{padding-top:5px;vertical-align:bottom;float:left;}
+li.menu{padding-top:0px;float:right;}
+li a{display:block;text-align:center;padding:14px 16px;text-decoration:none;color:white;}
+li.dark-mode a{background-color:#111111;color:white;}
+li a:hover{background-color:#00315E;color:white;}
+li.dark-mode a:hover{background-color:white;color:black;}
+input.login_form{text-align:center;border-radius:5px/5px;width:10em;height:2em;margin:0 auto;display:table-cell;margin-bottom:1vh;padding:1% 1% 1% 1%;font-size:18px;border:0px;}
+#login_form{margin:0 auto;width:15em;text-align:center;}
+.dark-mode{color:white;}
+.btn{background-color:#80D0D0;border:none;color:white;padding:15px 32px;text-align:center;text-decoration:none;display:inline-block;font-size:16px;}
+.content{padding-top:15px;padding-bottom:15px;padding-left:30px;flex:1 0 auto;}
+.magnifier{cursor:pointer;font-size:1.6em;}
+.demagnifier{cursor:pointer;font-size:1.2em;}
+.header{padding-left:25px;background:#048B9A;color:white;}
+.header_.dark-mode{background:black;}
+.header_{text-align:center;padding-top:5px;padding-bottom:5px;background:#80D0D0;margin:auto;color:#00315E;font-size:300%;font-family:"new century schoolbook";flex-shrink:0;width:100%;}
+.header.dark-mode{background:#111111;}
+#logo{vertical-align:middle;height:92px;}
+#mag_img{font-size:20px;padding-left:10px;padding-top:6%;}
+.sticky{position:fixed;top:0;width:100%;}</style>
+<meta charset=utf-8 />
+<title>Connexion - SEM</title>
+</head>
+<body>
+<script async>
+		window.onscroll = function() {stickfunc();};
+window.onload = function() {apply_theme();};
+
+
+function apply_theme(){
+	//var zoom = getCookie("zoom");
+	mode(0);
+	magnification(0);
+	//document.body.style.transitionDuration = "0.3s";
+	//document.body.style.WebkitTransitionDuration = "0.3s";
+	
+}
+
+function magnification(multiplier) {
+	var zoom = parseInt(getCookie("zoom"));
+	if(isNaN(zoom))zoom = 0;
+	zoom += multiplier;
+	
+	if(zoom > 5) zoom = 5;
+	if(zoom < -3) zoom = -3;
+	setCookie("zoom", zoom, 30);
+	if (document.body.style.fontSize == "") {
+		document.body.style.fontSize = "14px";
+	}
+	document.body.style.fontSize = 14 + (zoom * 2) + "px";
+
+	try {
+		var elems = document.getElementsByClassName('btn'), i;
+		for (i =0 ; i<elems.length ; i++) {
+			elems[i].style.fontSize = 18 + (zoom * 2) + "px";
+		}
+	}
+	catch(error) {
+		console.error(error);
+	}
+	try {
+		var elems = document.getElementsByClassName('login_form'), i;
+		for (i =0 ; i<elems.length ; i++) {
+			elems[i].style.fontSize = 18 + (zoom * 2) + "px";
+		}
+	}
+	catch(error) {
+		console.error(error);
+	}
+	try {
+		myimg = document.getElementById('mag_img').style.fontSize = 20 + (zoom * 2) + "px";
+	}
+	catch(error) {
+		console.error(error);
+	}
+}
+
+function setCookie(cname,cvalue,exdays) {
+	var d = new Date();
+	d.setTime(d.getTime() + (exdays*24*60*60*1000));
+	var expires = "expires=" + d.toGMTString();
+	document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+	var name = cname + "=";
+	var decodedCookie = decodeURIComponent(document.cookie);
+	var ca = decodedCookie.split(';');
+	for(var i = 0; i < ca.length; i++) {
+		var c = ca[i];
+		while (c.charAt(0) == ' ') {
+			c = c.substring(1);
+		}
+		if (c.indexOf(name) == 0) {
+			return c.substring(name.length, c.length);
+		}
+	}
+	return "";
+}
+
+function checkCookie() {
+	var user=getCookie("zoom");
+	if (user != "") {
+		alert("Welcome again " + user);
+	} else {
+		user = prompt("Please enter your name:","");
+		if (user != "" && user != null) {
+			setCookie("username", user, 30);
+		}
+	}
+}
+
+function mode(a){
+	var mode = parseInt(getCookie("mode"));
+	if(isNaN(mode))mode = 0;
+	mode += a;
+	if(mode == 2)mode = 0;
+	setCookie("mode", mode, 30);
+	if (mode == 1)
+	{
+		document.body.classList.add('dark-mode');
+		document.getElementById("myHeader_").classList.add('dark-mode');
+		document.getElementById("myHeader").classList.add('dark-mode');
+		document.getElementById("footer").classList.add('dark-mode');
+		var elems = document.getElementsByClassName('menu'), i;
+		for (i =0 ; i<elems.length ; i++) {
+			elems[i].classList.add('dark-mode');
+		}
+
+	}
+	else
+	{
+		document.body.classList.remove('dark-mode');
+		document.getElementById("myHeader_").classList.remove('dark-mode');
+		document.getElementById("myHeader").classList.remove('dark-mode');
+		document.getElementById("footer").classList.remove('dark-mode');
+
+		var elems = document.getElementsByClassName('menu'), i;
+		for (i =0 ; i<elems.length ; i++) {
+			elems[i].classList.remove('dark-mode');
+		}
+	}
+}
+
+	</script async>
+	<div class="header_" id="myHeader_" >
+		Squirrel Electricity Management
+
+	</div>
+	<div class="header" id="myHeader" >
+
+		<div class='menu'>
+			<ul>
+				<li><text_mag class='magnifier' onclick="magnification(1)"> Aa </text_mag>
+					<text_mag class='demagnifier' onclick="magnification(-1)"> Aa </text_mag>
+					<text_mag id='mag_img' onclick="mode(1)">&#9681;</text_mag>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="content">
+
+
+		<form id='login_form' action="/login" method="post">
+			<h1>Se connecter</h1>
+			<div id="loginC" class="login_form">
+				
+				<input type="text" name="login" class="login_form" required placeholder="Identifiant">
+			</div>
+
+			<div id="passC" class="login_form">
+				<input type="password" name="mdp" class="login_form" minlength="12" placeholder="Mot de passe" required>
+			</div>
+
+			<input type="submit" value="Valider" class="btn">
+			<br>
+			<a href="/forgot_password">Mot de passe oublié?</a>
+		</form>
+
+		
+
+		
+		
+		
+	</div>
+
+	<footer id='footer'>
+		<text_footer>Created by: Team Squirrel</text_footer>
+		<text_footer>Contact information: <a href="htts://twitter.com/TeamSquirrel2?s=20">twitter</a>.</text_footer>
+		<text_footer>Mentions légales: <a href="/mentions-legales">ici</a>.</text_footer>
+	</footer>
+	<script async>
+		var header = document.getElementById("myHeader");
+		var sticky = header.offsetTop;
+
+		function stickfunc() {
+			if (window.pageYOffset > sticky) {
+				header.classList.add("sticky");
+			} else {
+				header.classList.remove("sticky");
+			}
+		}
+	</script>
+<script async>(function(window){if(!!window.cookieChoices){return window.cookieChoices;}
+var document=window.document;var supportsTextContent='textContent'in document.body;var cookieChoices=(function(){var cookieName='displayCookieConsent';var cookieConsentId='cookieChoiceInfo';var dismissLinkId='cookieChoiceDismiss';function _createHeaderElement(cookieText,dismissText,linkText,linkHref){var butterBarStyles='position:fixed;height:5%;width:100%;background-color:#000000;color:#FAF0E6;'+'margin:0; left:0; bottom:0; padding:4px;z-index:1000;text-align:center;';var cookieConsentElement=document.createElement('div');cookieConsentElement.id=cookieConsentId;cookieConsentElement.style.cssText=butterBarStyles;cookieConsentElement.appendChild(_createConsentText(cookieText));if(!!linkText&&!!linkHref){cookieConsentElement.appendChild(_createInformationLink(linkText,linkHref));}
+cookieConsentElement.appendChild(_createDismissLink(dismissText));return cookieConsentElement;}
+function _createDialogElement(cookieText,dismissText,linkText,linkHref){var glassStyle='position:fixed;width:100%;height:100%;z-index:999;'+'top:0;left:0;opacity:0.5;filter:alpha(opacity=50);'+'background-color:#ccc;';var dialogStyle='z-index:1000;position:fixed;left:50%;top:50%';var contentStyle='position:relative;left:-50%;margin-top:-25%;'+'background-color:#fff;padding:20px;box-shadow:4px 4px 25px #888;';var cookieConsentElement=document.createElement('div');cookieConsentElement.id=cookieConsentId;var glassPanel=document.createElement('div');glassPanel.style.cssText=glassStyle;var content=document.createElement('div');content.style.cssText=contentStyle;var dialog=document.createElement('div');dialog.style.cssText=dialogStyle;var dismissLink=_createDismissLink(dismissText);dismissLink.style.display='block';dismissLink.style.textAlign='right';dismissLink.style.marginTop='8px';content.appendChild(_createConsentText(cookieText));if(!!linkText&&!!linkHref){content.appendChild(_createInformationLink(linkText,linkHref));}
+content.appendChild(dismissLink);dialog.appendChild(content);cookieConsentElement.appendChild(glassPanel);cookieConsentElement.appendChild(dialog);return cookieConsentElement;}
+function _setElementText(element,text){if(supportsTextContent){element.textContent=text;}else{element.innerText=text;}}
+function _createConsentText(cookieText){var consentText=document.createElement('span');_setElementText(consentText,cookieText);return consentText;}
+function _createDismissLink(dismissText){var dismissLink=document.createElement('a');_setElementText(dismissLink,dismissText);dismissLink.id=dismissLinkId;dismissLink.href='#';dismissLink.style.marginLeft='15px';dismissLink.style.color='#FAF0E6';return dismissLink;}
+function _createInformationLink(linkText,linkHref){var infoLink=document.createElement('a');_setElementText(infoLink,linkText);infoLink.href=linkHref;infoLink.target='_blank';infoLink.style.marginLeft='15px';infoLink.style.color='#FAF0E6';return infoLink;}
+function _dismissLinkClick(){_saveUserPreference();_removeCookieConsent();return false;}
+function _showCookieConsent(cookieText,dismissText,linkText,linkHref,isDialog){if(_shouldDisplayConsent()){_removeCookieConsent();var consentElement=(isDialog)?_createDialogElement(cookieText,dismissText,linkText,linkHref):_createHeaderElement(cookieText,dismissText,linkText,linkHref);var fragment=document.createDocumentFragment();fragment.appendChild(consentElement);document.body.appendChild(fragment.cloneNode(true));document.getElementById(dismissLinkId).onclick=_dismissLinkClick;}}
+function showCookieConsentBar(cookieText,dismissText,linkText,linkHref){_showCookieConsent(cookieText,dismissText,linkText,linkHref,false);}
+function showCookieConsentDialog(cookieText,dismissText,linkText,linkHref){_showCookieConsent(cookieText,dismissText,linkText,linkHref,true);}
+function _removeCookieConsent(){var cookieChoiceElement=document.getElementById(cookieConsentId);if(cookieChoiceElement!=null){cookieChoiceElement.parentNode.removeChild(cookieChoiceElement);}}
+function _saveUserPreference(){var expiryDate=new Date();expiryDate.setFullYear(expiryDate.getFullYear()+1);document.cookie=cookieName+'=y; path=/; expires='+expiryDate.toGMTString();}
+function _shouldDisplayConsent(){return!document.cookie.match(new RegExp(cookieName+'=([^;]+)'));}
+var exports={};exports.showCookieConsentBar=showCookieConsentBar;exports.showCookieConsentDialog=showCookieConsentDialog;return exports;})();window.cookieChoices=cookieChoices;return cookieChoices;})(this);</script><script async>document.addEventListener('DOMContentLoaded',function(event){cookieChoices.showCookieConsentBar('Ce site utilise des cookies pour vous offrir le meilleur service. En poursuivant votre navigation, vous acceptez l’utilisation des cookies.','J’accepte','En savoir plus','http://vps753617.ovh.net/mentions-legales');});</script>
+</body>
+</html>

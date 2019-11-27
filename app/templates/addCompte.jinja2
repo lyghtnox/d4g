@@ -1,0 +1,210 @@
+<html>
+<head >
+  <meta charset="utf-8" />
+  <title>Ajout compte - SEM</title>
+  <link rel="stylesheet" href="{{ url_for('static',filename='styles/style.css') }}" />
+</head>
+
+<body>
+  <script src="{{ url_for('static',filename='scripts/script.js') }}" async></script>
+  <div class="header_" id="myHeader_" >
+    <img id='logo' class="main_logo" src="{{ url_for('static',filename='img/Logo.png') }}" alt="Logo">
+    Squirrel Electricity Management
+
+  </div>
+  <div class="header" id="myHeader" >
+
+    <div class='menu'>
+      <ul>
+        <li><text_mag class='magnifier' onclick="magnification(1)"> Aa </text_mag>
+          <text_mag class='demagnifier' onclick="magnification(-1)"> Aa </text_mag>
+          <text_mag id='mag_img' onclick="mode(1)">&#9681;</text_mag>
+        </li>
+        <li class='menu'><a class="active" href='/logout'>Se déconnecter</a></li>
+        <li class='menu'><a class="active" href='/upload'>Documents</a></li>
+        <li class='menu'><a class="active" href='/admin'>Dashboard</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="content">
+    <h1>Création du compte</h1>
+    <form class="form_creation" action="/account" method="post">
+      <h2> Création du logement :</h2>
+
+      <div class="foyerC">
+        <label for="foyer">Foyer :</label>
+        <input type="text" name="foyerArea" id="foyer">
+      </div>
+
+      <div class="typeC">
+        <label for="type">Type(*) :</label>
+        <input type="text" name="textArea" id="type" pattern="^[0-1]$"  required>
+      </div>
+
+      <div class="surfaceC">
+        <label for="surface">Surface(*) :</label>
+        <input type="text" name="surfaceArea" id="surface" pattern="^[0-9]*[1-9][0-9]*(,[0-9]*)?|[0-9]*(,[0-9]*[1-9][0-9]*)?$" required>
+      </div>
+
+      <div class="piecesC">
+        <label for="pieces">Nombre de pieces(*) :</label>
+        <input type="text" name="piecesArea" id="pieces" pattern="^\d*$" required>
+      </div>
+
+      <div class="chauffageC">
+        <label for="chauffage">Type de chauffage(*) :</label>
+        <input type="text" name="chauffageArea" id="chauffage"  required>
+      </div>
+
+      <div class="anneeConstruC">
+        <label for="anneeConstru">Année de construction(*) :</label>
+        <input type="text" name="anneeConstruArea" id="anneeConstru" pattern="^[12][0-9]{3}$" required>
+      </div>
+
+      <div class="numVoieC">
+        <label for="numVoie">Numéro de rue(*) :</label>
+        <input type="text" name="numVoieArea" id="numVoie" pattern="^\d*$" required>
+      </div>
+
+      <div class="rueC">
+        <label for="rue">Nom de la rue(*) :</label>
+        <input type="text" name="rueArea" id="rue"  required>
+      </div>
+
+      <div class="cpC">
+        <label for="cp">Code postal(*) :</label>
+        <input type="text" name="cpArea" id="cp" pattern="^([0-9]{5})$" required>
+      </div>
+
+      <div class="villeC">
+        <label for="ville">Ville(*) :</label>
+        <input type="text" name="villeArea" id="ville" pattern="^[A-Z][a-z]*$" required>
+      </div>
+
+      <h2>Création du propriétaire :</h2>
+
+      <span>Vous êtes(*) :
+        <div>
+          <input type="radio" onclick="radio('radioSoc', 'societeC', 'proprio')" name="radioCheck" value="radioSoc" id="radioSoc" checked>
+          <label for="radioSoc"> Une société</label>
+        </div>
+
+        <div>
+          <input type="radio" onclick="radio('radioProp', 'proprio', 'societeC')" name="radioCheck" value="radioProp" id="radioProp">
+          <label for="radioProp"> Une personne</label>
+        </div>
+      </span>
+
+      <div id="proprio" hidden>
+
+        <div class="nomProC">
+          <label for="nomPro">Nom(*) :</label>
+          <input type="text" name="nomProArea"  id="nomPro" >
+        </div>
+
+        <div class="prenomProC">
+          <label for="prenomPro">Prénom(*) :</label>
+          <input type="text" name="prenomProArea"  id="prenomPro" >
+        </div>
+
+      </div>
+
+      <div id="societeC" hidden>
+        <label for="societe">Nom de la société(*) :</label>
+        <input type="text" name="societeArea" id="societePro" >
+      </div>
+
+      <div class="adresseC">
+        <label for="adresse">Adresse(*) :</label>
+        <input type="text" name="adresseArea" id="adresse">
+      </div>
+
+      <h2>Création du locataire :</h2>
+
+      <div class="check">
+        <span>Le locataire est il également le propriétaire ?</span>
+        <input type="checkbox" onclick="verifPro()" name="checkPro" id="checkPro">
+      </div>
+
+      <div class="nomLocC">
+        <label for="nomLoc">Nom(*) :</label>
+        <input type="text" name="nomLocArea" id="nomLoc" required>
+      </div>
+
+      <div class="prenomLocC">
+        <label for="prenomLoc">Prénom(*) :</label>
+        <input type="text" name="prenomLocArea" id="prenomLoc" required>
+      </div>
+
+      <h2>Identification :</h2>
+
+      <div class="loginC">
+        <label for="login">Login(*) :</label>
+        <input type="email" name="loginArea" pattern="[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([_\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})" id="login" required>
+      </div>
+
+      <p>(*) : Champs requis.</p>
+      <input  type="submit" value="Valider">
+
+    </form>
+
+    <script async>
+
+      function radio(btnRadio, elemS, elemH){
+        if (document.getElementById(btnRadio).checked === true){
+          document.getElementById(elemS).style.display = "block";
+          document.getElementById(elemH).style.display = "none";
+          document.getElementById("nomPro").value = "";
+          document.getElementById("prenomPro").value = "";
+          document.getElementById("societePro").value = "";
+
+        }
+
+        if (document.getElementById(btnRadio).value === "radioProp"){
+          document.getElementById("nomPro").required = "required";
+          document.getElementById("prenomPro").required = "required";
+          document.getElementById("societePro").required = false;
+        }
+
+        if (document.getElementById(btnRadio).value === "radioSoc"){
+          document.getElementById("societePro").required = "required";
+          document.getElementById("nomPro").required = false;
+          document.getElementById("prenomPro").required = false;
+        }
+      }
+
+      var input = document.getElementById("login");
+      var text = document.getElementById("text");
+
+      function verifPro(){
+        if (checkPro.checked === true){
+          document.getElementById("nomLoc").value = document.getElementById("nomPro").value;
+          document.getElementById("prenomLoc").value = document.getElementById("prenomPro").value;
+        }
+      }
+    </script>
+  </div>
+
+  <footer id='footer'>
+    <text_footer>Created by: Team Squirrel</text_footer>
+    <text_footer>Contact information: <a href="https://twitter.com/TeamSquirrel2?s=20">twitter</a>.</text_footer>
+    <text_footer>Mentions légales: <a href="/mentions-legales">ici</a>.</text_footer>
+  </footer>
+  <script async>
+    var header = document.getElementById("myHeader");
+    var sticky = header.offsetTop;
+
+    function stickfunc() {
+      if (window.pageYOffset > sticky) {
+        header.classList.add("sticky");
+      } else {
+        header.classList.remove("sticky");
+      }
+    }
+  </script>
+  <script src="{{ url_for('static',filename='scripts/cookiechoices.js') }}" async></script>
+  <script async>document.addEventListener('DOMContentLoaded', function(event){cookieChoices.showCookieConsentBar('Ce site utilise des cookies pour vous offrir le meilleur service. En poursuivant votre navigation, vous acceptez l’utilisation des cookies.', 'J’accepte', 'En savoir plus', 'http://vps753617.ovh.net/mentions-legales');});
+</script>
+</body>
+</html>

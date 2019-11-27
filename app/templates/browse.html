@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8" />
+	<style type="text/css">
+		a.file_link:link {
+			color: #80D0D0;
+		}
+
+		a.file_link:visited {
+			color: #80D0D0;
+		}
+		li::before{
+			content: "•  ";
+			color:#80D0D0;
+		}
+		ul {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<ul>
+		{% for item in itemList %}
+		<li><a class="file_link" href="/browser{{ urlFilePath }}/{{ item }}">{{ item }}</a></li>
+		{% endfor %}
+	</ul>
+</body>
+</html>

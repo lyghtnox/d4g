@@ -1,0 +1,130 @@
+<html>
+<head >
+  <meta charset="utf-8" />
+  <title>Dashboard - SEM</title>
+  <link rel="stylesheet" href="{{ url_for('static',filename='styles/style.css') }}" />
+</head>
+
+<body>
+  <script src="{{ url_for('static',filename='scripts/script.js') }}" ></script>
+  <div class="header_" id="myHeader_" >
+    <img id='logo' class="main_logo" src="{{ url_for('static',filename='img/Logo.png') }}" alt="Logo">
+    Squirrel Electricity Management
+
+  </div>
+  <div class="header" id="myHeader" >
+
+    <div class='menu'>
+      <ul>
+        <li><text_mag class='magnifier' onclick="magnification(1)"> Aa </text_mag>
+          <text_mag class='demagnifier' onclick="magnification(-1)"> Aa </text_mag>
+          <text_mag id='mag_img' onclick="mode(1)">&#9681;</text_mag>
+        </li>
+        <li class='menu'><a class="active" href='/logout'>Se déconnecter</a></li>
+        <li class='menu'><a class="active" href='/upload'>Documents</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <div class="chart-container" >
+      Graphique de votre consommation électrique :
+      <select id="DaysSelector" onchange="updateGraph()">
+        <option value="1" >1 jours</option>
+        <option value="5" >5 jours</option>
+        <option value="10">10 jours</option>
+        <option value="15">15 jours</option>
+        <option value="31" selected="selected">31 jours</option>
+      </select>
+      <canvas id="myChart"></canvas>
+    </div>
+
+    <div class="data_table_div" id="data_table_div">
+
+      Tableau de votre consommation électrique :
+    </div>
+    <div class="personnal_info_table" >
+      <table id="info_table">
+        <tr>
+          <th>Locataire</th>
+          <td>{{loc[0]}} {{loc[1]}}</td>
+        </tr>
+        <tr>
+          <th>Propriétaire</th>
+          <td>
+          {%if pro[0] %}
+            {{pro[0]}} {{pro[1]}}
+          {%else%}
+            {{pro[2]}}
+          {%endif%}
+          </td>
+        </tr>
+        <tr>
+          <td>Adresse</td>
+          <td>{{pro[3]}}</td>
+        </tr>
+        <tr>
+          <th>Logement</th>
+          <td>{{log[0]}}</td>
+        </tr>
+        <tr>
+          <td>Surface</td>
+          <td>{{log[2]}} m²</td>
+        </tr>
+        <tr>
+          <td>Nombre de pièces</td>
+          <td>{{log[3]}}</td>
+        </tr>
+        <tr>
+          <td>Type de chauffage</td>
+          <td>{{log[4]}}</td>
+        </tr>
+        <tr>
+          <td>Année de contruction</td>
+          <td>{{log[5]}}</td>
+        </tr>
+        <tr>
+          <td>Adresse</td>
+          <td>{{log[6]}} {{log[7]}}, {{log[8]}}, {{log[9]}}</td>
+        </tr>
+      </table>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js" ></script>
+    <script >
+      var dataset = {{data}};
+
+      var labelset = {{labels}};
+
+
+      var theChart = Chart.Bar('myChart', {
+        animating: false,
+        options: options,
+        data: data
+      });
+      updateGraph();
+    </script>
+  </div>
+
+  <footer id='footer'>
+    <text_footer>Created by: Team Squirrel</text_footer>
+    <text_footer>Contact information: <a href="https://twitter.com/TeamSquirrel2?s=20">twitter</a>.</text_footer>
+    <text_footer>Mentions légales: <a href="/mentions-legales">ici</a>.</text_footer>
+  </footer>
+  <script >
+    var header = document.getElementById("myHeader");
+    var sticky = header.offsetTop;
+
+    function stickfunc() {
+      if (window.pageYOffset > sticky) {
+        header.classList.add("sticky");
+      } else {
+        header.classList.remove("sticky");
+      }
+    }
+  </script>
+    <script src="{{ url_for('static',filename='scripts/cookiechoices.js') }}" ></script>
+  <script >document.addEventListener('DOMContentLoaded', function(event){cookieChoices.showCookieConsentBar('Ce site utilise des cookies pour vous offrir le meilleur service. En poursuivant votre navigation, vous acceptez l’utilisation des cookies.', 'J’accepte', 'En savoir plus', 'http://vps753617.ovh.net/mentions-legales');});
+    </script>
+</body>
+</html>

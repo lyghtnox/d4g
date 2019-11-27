@@ -1,0 +1,90 @@
+<html>
+<head >
+  <meta charset="utf-8" />
+  <title>Dashboard Admin - SEM</title>
+  <link rel="stylesheet" href="{{ url_for('static',filename='styles/style.css') }}" />
+</head>
+
+<body>
+  <script src="{{ url_for('static',filename='scripts/script.js') }}" ></script>
+  <div class="header_" id="myHeader_" >
+    <img id='logo' class="main_logo" src="{{ url_for('static',filename='img/Logo.png') }}" alt="Logo">
+    Squirrel Electricity Management
+
+  </div>
+  <div class="header" id="myHeader" >
+
+    <div class='menu'>
+      <ul>
+        <li><text_mag class='magnifier' onclick="magnification(1)"> Aa </text_mag>
+          <text_mag class='demagnifier' onclick="magnification(-1)"> Aa </text_mag>
+          <text_mag id='mag_img' onclick="mode(1)">&#9681;</text_mag>
+        </li>
+        <li class='menu'><a class="active" href='/logout'>Se déconnecter</a></li>
+        <li class='menu'><a class="active" href='/upload'>Documents</a></li>
+        <li class='menu'><a class="active" href='/account'>Ajout Compte</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="content">
+    <form action="/admin" class="AdminLogForm" method="post">
+      Nombre de jour :
+      <input class="input_form" type="number" name="nbJour" value="15">
+
+      Nombre de logements :
+      <input class="input_form"type="number" name="nbLogements" value="5">
+
+      Ordre Croissant
+      <input type="checkbox" name="croissant" value="true" checked>
+      <input type="submit" value="Submit">
+    </form>
+
+    <div class="chart-container" >
+      <canvas id="myChart"></canvas>
+    </div>
+
+    <div class="data_table_div table_admin" id="data_table_div">
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js" ></script>
+    <script >
+
+      var dataset = {{data}};
+
+      var labelset = {{labels}};
+      
+
+      var theChart = Chart.Bar('myChart', {
+        animating: false,
+        options: options,
+        data: data
+      });
+      printGraph();
+      listeLogement(logements);
+      
+    </script>
+  </div>
+
+  <footer id='footer'>
+    <text_footer>Created by: Team Squirrel</text_footer>
+    <text_footer>Contact information: <a href="https://twitter.com/TeamSquirrel2?s=20">twitter</a>.</text_footer>
+    <text_footer>Mentions légales: <a href="/mentions-legales">ici</a>.</text_footer>
+  </footer>
+  <script >
+    var header = document.getElementById("myHeader");
+    var sticky = header.offsetTop;
+
+    function stickfunc() {
+      if (window.pageYOffset > sticky) {
+        header.classList.add("sticky");
+      } else {
+        header.classList.remove("sticky");
+      }
+    }
+  </script>
+    <script src="{{ url_for('static',filename='scripts/cookiechoices.js') }}" ></script>
+  <script>document.addEventListener('DOMContentLoaded', function(event){cookieChoices.showCookieConsentBar('Ce site utilise des cookies pour vous offrir le meilleur service. En poursuivant votre navigation, vous acceptez l’utilisation des cookies.', 'J’accepte', 'En savoir plus', 'http://vps753617.ovh.net/mentions-legales');});
+    </script>
+</body>
+</html>

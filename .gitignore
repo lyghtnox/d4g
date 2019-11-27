@@ -1,0 +1,6 @@
+venv/*
+cert/*
+secrets.py
+*.db
+*.pyc
+app/uploads/*

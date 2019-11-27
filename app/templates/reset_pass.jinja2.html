@@ -1,0 +1,85 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="reset_pass.jinja2_fichiers/style.css')%2520%257D%257D">
+</head>
+
+<body>
+  <div class="header_" id="myHeader_">
+    <img id="logo" class="main_logo" src="reset_pass.jinja2_fichiers/Logo.png')%2520%257D%257D" alt="Logo">
+    Squirrel Electricity Management
+
+  </div>
+  <div class="header" id="myHeader">
+
+    <div class="menu">
+      <ul>
+        <li><text_mag class="magnifier" onclick="magnification(1)"> Aa </text_mag>
+          <text_mag class="demagnifier" onclick="magnification(-1)"> Aa </text_mag>
+          <text_mag id='mag_img' onclick="mode(1)">&#9681;</text_mag>
+        </li>
+        <li class="menu"><a class="active" onclick="deleteCookie('session')">Se déconnecter</a></li>
+        <li class="menu"><a href="#news">News</a></li>
+        <li class="menu"><a href="#contact">Contact</a></li>
+        <li class="menu"><a href="#about">About</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="content">
+    <form id="login_form" action="/pass_reset" method="post">
+	
+
+			<h1>Changer le mot de passe</h1>
+				<input type="password" name="pass" class="input_form" id="password" onchange="checkPassword()" required="" placeholder="Mot de passe">
+				<input type="password" name="pass_confirm" class="input_form" id="confirm_password" onkeyup="checkPassword()" required="" placeholder="Confirmer Mot de passe">
+				<input type="submit" value="Changer le mot de passe" class="btn">
+
+	</form>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+           {{ message }}
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+  </div>
+
+  <footer id='footer'>
+    <text_footer>Created by: Team Squirrel</text_footer>
+    <text_footer>Contact information: <a href="https://twitter.com/TeamSquirrel2?s=20">twitter</a>.</text_footer>
+    <text_footer>Mentions légales: <a href="/mentions-legales">ici</a>.</text_footer>
+  </footer>
+  <script async>
+    var header = document.getElementById("myHeader");
+    var sticky = header.offsetTop;
+	var password = document.getElementById("password");
+	var confirm_password = document.getElementById("confirm_password");
+	var regex_password = /^(?=.*[A-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[~!@#$%^&*()-_=+[\]{};:,\.<>\/\?€£µ\|])\S{12,}$/;
+    function stickfunc() {
+      if (window.pageYOffset > sticky) {
+        header.classList.add("sticky");
+      } else {
+        header.classList.remove("sticky");
+      }
+    }
+	
+	function checkPassword(){
+		if (regex_password.test(password.value)){
+			if(password.value != confirm_password.value) {
+			confirm_password.setCustomValidity("Les mots de passe ne sont pas identiques");
+			} else {
+			password.setCustomValidity('');
+			confirm_password.setCustomValidity('');
+			}
+		} else {
+			password.setCustomValidity("Le mot de passe n'est pas assez complexe. Assurez vous d'avoir 12 caractères minimum, dont au moins une minuscule, une majuscule, un chiffre et un caractère spécial");		
+		}
+	}
+
+
+  </script>
+
+
+</body></html>

@@ -1,0 +1,78 @@
+<html>
+<head >
+	<meta charset="utf-8" />
+	<title>Connexion - SEM</title>
+	<link rel="stylesheet" href="{{ url_for('static',filename='styles/style.css') }}" />
+</head>
+
+<body>
+	<script src="{{ url_for('static',filename='scripts/script.js') }}" async></script>
+	<div class="header_" id="myHeader_" >
+		<img id='logo' class="main_logo" src="{{ url_for('static',filename='img/Logo.png') }}" alt="Logo">
+		Squirrel Electricity Management
+
+	</div>
+	<div class="header" id="myHeader" >
+
+		<div class='menu'>
+			<ul>
+				<li><text_mag class='magnifier' onclick="magnification(1)"> Aa </text_mag>
+					<text_mag class='demagnifier' onclick="magnification(-1)"> Aa </text_mag>
+					<text_mag id='mag_img' onclick="mode(1)">&#9681;</text_mag>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="content">
+
+
+		<form id='login_form' action="/login" method="post">
+			<h1>Se connecter</h1>
+			<div id="loginC" class="login_form">
+				
+				<input type="text" name="login" class="login_form" required placeholder="Identifiant">
+			</div>
+
+			<div id="passC" class="login_form">
+				<input type="password" name="mdp" class="login_form" minlength="12" placeholder="Mot de passe" required>
+			</div>
+
+			<input type="submit" value="Valider" class="btn">
+			<br>
+			<a href="/forgot_password">Mot de passe oublié?</a>
+		</form>
+
+		
+
+		{% with messages = get_flashed_messages() %}
+		{% if messages %}
+		{% for message in messages %}
+		{{ message }}
+		{% endfor %}
+		{% endif %}
+		{% endwith %}
+	</div>
+
+	<footer id='footer'>
+		<text_footer>Created by: Team Squirrel</text_footer>
+		<text_footer>Contact information: <a href="https://twitter.com/TeamSquirrel2?s=20">twitter</a>.</text_footer>
+		<text_footer>Mentions légales: <a href="/mentions-legales">ici</a>.</text_footer>
+	</footer>
+	<script async>
+		var header = document.getElementById("myHeader");
+		var sticky = header.offsetTop;
+
+		function stickfunc() {
+			if (window.pageYOffset > sticky) {
+				header.classList.add("sticky");
+			} else {
+				header.classList.remove("sticky");
+			}
+		}
+	</script>
+	<script src="{{ url_for('static',filename='scripts/cookiechoices.js') }}" async>
+		</script><script async>document.addEventListener('DOMContentLoaded', 
+			function(event){cookieChoices.showCookieConsentBar('Ce site utilise des cookies pour vous offrir le meilleur service. En poursuivant votre navigation, vous acceptez l’utilisation des cookies.', 'J’accepte', 'En savoir plus', 'http://vps753617.ovh.net/mentions-legales');});</script>
+		</body>
+		</html>

@@ -7,6 +7,7 @@ Contributors:
   - Chaumeil Thomas
   - [Fieber Théo](https://github.com/Fienberber)
   - Mousseau Louise
+  - Mathien Thomas
   
 # Installation
 To get started:

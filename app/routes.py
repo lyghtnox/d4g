@@ -13,8 +13,6 @@ from .secrets import SMTP_PASS, SMTP_USER
 
 
 DB_FILE = 'app/cnl.db'
-SMTP_USER = 'no.reply.sem@gmail.com'
-SMTP_PASS = ''
 UPLOAD_FOLDER = os.path.join(app.root_path, 'uploads')
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg'])
 

@@ -1,6 +1,7 @@
 # Squirrel Electricity Management
 
 This project was created during the Design4Green #3 in 2019.
+
 Contributors:
   - Campan Nathaniel
   - Chaumeil Thomas
